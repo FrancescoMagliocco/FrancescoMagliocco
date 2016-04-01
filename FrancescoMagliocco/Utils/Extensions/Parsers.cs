@@ -37,7 +37,9 @@ namespace FrancescoMagliocco.Utils.Extensions
         /// <summary>
         ///     Converts the give value to a <see cref="decimal"/>.
         /// </summary>
-        /// <param name="value"> The given value to be converted.  <see cref="IConvertible"/>. </param>
+        /// <param name="source">
+        ///     The given value to be converted.  <see cref="IConvertible"/>.
+        /// </param>
         /// <param name="numberStyles">
         ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
         ///     <seealso cref="NumberStyles"/>.
@@ -50,19 +52,21 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If conversion is successful, returns the given value converted into a <see cref="decimal"/>, otherwise returns
         ///     0M.
         /// </returns>
-        public static decimal ToDecimal(this IConvertible value,
+        public static decimal ToDecimal(this IConvertible source,
                                         NumberStyles numberStyles = NumberStyles.None,
                                         IFormatProvider provider = null)
         {
             // TODO Make sure nothing is thrown when 'null' is being used as the provider.
             decimal result;
-            return decimal.TryParse(value.ToString(provider), numberStyles, provider, out result) ? result : result;
+            return decimal.TryParse(source.ToString(provider), numberStyles, provider, out result) ? result : result;
         }
 
         /// <summary>
         ///     Converts the give value to a <see cref="double"/>.
         /// </summary>
-        /// <param name="value"> The given value to be converted.  <see cref="IConvertible"/>. </param>
+        /// <param name="source">
+        ///     The given value to be converted.  <see cref="IConvertible"/>.
+        /// </param>
         /// <param name="numberStyles">
         ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
         ///     <seealso cref="NumberStyles"/>.
@@ -75,19 +79,21 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If conversion is successful, returns the given value converted into a <see cref="double"/>, otherwise returns
         ///     0D.
         /// </returns>
-        public static double ToDouble(this IConvertible value,
+        public static double ToDouble(this IConvertible source,
                                       NumberStyles numberStyles = NumberStyles.None,
                                       IFormatProvider provider = null)
         {
             // TODO Make sure nothing is thrown when 'null' is being used as the provider.
             double result;
-            return double.TryParse(value.ToString(provider), numberStyles, provider, out result) ? result : result;
+            return double.TryParse(source.ToString(provider), numberStyles, provider, out result) ? result : result;
         }
 
         /// <summary>
         ///     Converts the give value to a <see cref="float"/>.
         /// </summary>
-        /// <param name="value"> The given value to be converted.  <see cref="IConvertible"/>. </param>
+        /// <param name="source">
+        ///     The given value to be converted.  <see cref="IConvertible"/>.
+        /// </param>
         /// <param name="numberStyles">
         ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
         ///     <seealso cref="NumberStyles"/>.
@@ -100,19 +106,21 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If conversion is successful, returns the given value converted into a <see cref="float"/>, otherwise returns
         ///     0F.
         /// </returns>
-        public static float ToFloat(this IConvertible value,
+        public static float ToFloat(this IConvertible source,
                                     NumberStyles numberStyles = NumberStyles.None,
                                     IFormatProvider provider = null)
         {
             // TODO Make sure nothing is thrown when 'null' is being used as the provider.
             float result;
-            return float.TryParse(value.ToString(provider), numberStyles, provider, out result) ? result : result;
+            return float.TryParse(source.ToString(provider), numberStyles, provider, out result) ? result : result;
         }
 
         /// <summary>
         ///     Converts the give value to an <see cref="int"/>.
         /// </summary>
-        /// <param name="value"> The given value to be converted.  <see cref="IConvertible"/>. </param>
+        /// <param name="source">
+        ///     The given value to be converted.  <see cref="IConvertible"/>.
+        /// </param>
         /// <param name="numberStyles">
         ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
         ///     <seealso cref="NumberStyles"/>.
@@ -125,19 +133,21 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If conversion is successful, returns the given value converted into an <see cref="int"/>, otherwise returns
         ///     0.
         /// </returns>
-        public static int ToInt(this IConvertible value,
+        public static int ToInt(this IConvertible source,
                                 NumberStyles numberStyles = NumberStyles.None,
                                 IFormatProvider provider = null)
         {
             // TODO Make sure nothing is thrown when 'null' is being used as the provider.
             int result;
-            return int.TryParse(value.ToString(provider), numberStyles, provider, out result) ? result : result;
+            return int.TryParse(source.ToString(provider), numberStyles, provider, out result) ? result : result;
         }
 
         /// <summary>
         ///     Converts the give value to a <see cref="long"/>.
         /// </summary>
-        /// <param name="value"> The given value to be converted.  <see cref="IConvertible"/>. </param>
+        /// <param name="source">
+        ///     The given value to be converted.  <see cref="IConvertible"/>.
+        /// </param>
         /// <param name="numberStyles">
         ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
         ///     <seealso cref="NumberStyles"/>.
@@ -150,13 +160,13 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If conversion is successful, returns the given value converted into a <see cref="long"/>, otherwise returns
         ///     0L.
         /// </returns>
-        public static long ToLong(this IConvertible value,
+        public static long ToLong(this IConvertible source,
                                   NumberStyles numberStyles = NumberStyles.None,
                                   IFormatProvider provider = null)
         {
             // TODO Make sure nothing is thrown when 'null' is being used as the provider.
             long result;
-            return long.TryParse(value.ToString(provider), numberStyles, provider, out result) ? result : result;
+            return long.TryParse(source.ToString(provider), numberStyles, provider, out result) ? result : result;
         }
         #endregion
     }
