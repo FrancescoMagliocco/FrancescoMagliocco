@@ -226,6 +226,33 @@ namespace FrancescoMagliocco.Utils.Tools
 
         #region Members
         /// <summary>
+        ///     Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <returns>
+        ///     true if the specified object  is equal to the current object; otherwise, false.
+        /// </returns>
+        /// <param name="obj">
+        ///     The object to compare with the current object.
+        /// </param>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) { return false; }
+            if (ReferenceEquals(this, obj)) { return true; }
+            return obj is FileSize && this.Equals((FileSize)obj);
+        }
+
+        /// <summary>
+        ///     Serves as the default hash function.
+        /// </summary>
+        /// <returns>
+        ///     A hash code for the current object.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked { return ((int)this._baseValue * 397) ^ this.Size.GetHashCode(); }
+        }
+
+        /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns>
@@ -440,28 +467,216 @@ namespace FrancescoMagliocco.Utils.Tools
         ///     <see cref="BaseValue"/> (If specified) with the correct value, then to a <see cref="string"/>.
         ///     <seealso cref="Units"/>.  <seealso cref="FileSize"/>.  <seealso cref="decimal"/>
         /// </returns>
-        [SuppressMessage("ReSharper", "ConvertMethodToExpressionBody", Justification = "To long.")]
         public string ToUnitString(Units unit,
                                    CultureInfo cultureInfo = null,
                                    NumberStyles numberStyles = NumberStyles.None,
                                    IFormatProvider provider = null)
-        {
-            return this.ToUnit(unit, cultureInfo, numberStyles, provider) + nameof(unit);
-        }
-        #endregion
-
-        // TODO May use same principle as above parses (Bit and Byte) instead of one different method for each base.
-        // TODO ToYottaByteString
-        // TODO ToYottaByte
-        // TODO ToZettaByteString
-        // TODO ToZettaByte
-        // TODO ToYottaBitString
-        // TODO ToYottaBit
-        // TODO ToZettaBitString
-
-        // TODO ToZettaBit
-        // TODO Static FromUnitToUnitString (Maybe try to use generics)
+            => this.ToUnit(unit, cultureInfo, numberStyles, provider) + nameof(unit);
 
         // TODO Static FromUnitToUnit (Maybe try to use generics)
+        // TODO Static FromUnitToUnitString (Maybe try to use generics)
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="ZettaBit"/>.  <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="ZettaBit"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.  <seealso cref="decimal"/>.
+        /// </returns>
+        public decimal ToZettaBit(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+        {
+            decimal result;
+            var tempSize = this._baseValue == BaseValue.Binary ? this.Size * 8M : this.Size;
+            /*
+             * So I'm hoping that if suceeded it will return the correct value, and if it doesn't succeed that it will
+             * atleast return it convertetd into the new base (If specified) with the correct value.
+             */
+            return decimal.TryParse((tempSize / ZettaBit).ToString(provider), numberStyles, provider, out result)
+                       ? result
+                       : tempSize;
+        }
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="ZettaBit"/>, then into a <see cref="string"/>.
+        ///     <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="ZettaBit"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value, then to a <see cref="string"/>.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.
+        ///     <seealso cref="decimal"/>.
+        /// </returns>
+        public string ToZettaBitString(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+            => this.ToZettaBit(numberStyles, provider) + "Zb";
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="ZettaByte"/>.  <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="ZettaByte"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.  <seealso cref="decimal"/>.
+        /// </returns>
+        public decimal ToZettaByte(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+        {
+            decimal result;
+            var tempSize = this._baseValue == BaseValue.Binary ? this.Size : this.Size / 8M;
+            /*
+             * So I'm hoping that if suceeded it will return the correct value, and if it doesn't succeed that it will
+             * atleast return it convertetd into the new base (If specified) with the correct value.
+             */
+            return decimal.TryParse((tempSize / ZettaByte).ToString(provider), numberStyles, provider, out result)
+                       ? result
+                       : tempSize;
+        }
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="ZettaByte"/>, then into a <see cref="string"/>.
+        ///     <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="ZettaByte"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value, then to a <see cref="string"/>.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.
+        ///     <seealso cref="decimal"/>.
+        /// </returns>
+        public string ToZettaByteString(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+            => this.ToZettaByte(numberStyles, provider) + "ZB";
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="YottaBit"/>.  <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="YottaBit"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.  <seealso cref="decimal"/>.
+        /// </returns>
+        public decimal ToYottaBit(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+        {
+            decimal result;
+            var tempSize = this._baseValue == BaseValue.Binary ? this.Size * 8M : this.Size;
+            /*
+             * So I'm hoping that if suceeded it will return the correct value, and if it doesn't succeed that it will
+             * atleast return it convertetd into the new base (If specified) with the correct value.
+             */
+            return decimal.TryParse((tempSize / YottaBit).ToString(provider), numberStyles, provider, out result)
+                       ? result
+                       : tempSize;
+        }
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="YottaBit"/>, then into a <see cref="string"/>.
+        ///     <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="YottaBit"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value, then to a <see cref="string"/>.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.
+        ///     <seealso cref="decimal"/>.
+        /// </returns>
+        public string ToYottaBitString(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+            => this.ToYottaBit(numberStyles, provider) + "Yb";
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="YottaByte"/>.  <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="YottaByte"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.  <seealso cref="decimal"/>.
+        /// </returns>
+        public decimal ToYottaByte(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+        {
+            decimal result;
+            var tempSize = this._baseValue == BaseValue.Binary ? this.Size : this.Size / 8M;
+            /*
+             * So I'm hoping that if suceeded it will return the correct value, and if it doesn't succeed that it will
+             * atleast return it convertetd into the new base (If specified) with the correct value.
+             */
+            return decimal.TryParse((tempSize / YottaByte).ToString(provider), numberStyles, provider, out result)
+                       ? result
+                       : tempSize;
+        }
+
+        /// <summary>
+        ///     Converts the current <see cref="Size"/> to a <see cref="YottaByte"/>, then into a <see cref="string"/>.
+        ///     <seealso cref="FileSize"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        ///     If a number style is not specified, <see cref="NumberStyles.None"/> will be used as default.
+        ///     <seealso cref="NumberStyles"/>.
+        /// </param>
+        /// <param name="provider">
+        ///     If a provider is not specified, 'null' will be used as default.  <see cref="IFormatProvider"/>.
+        ///     <seealso cref="CultureInfo"/>.
+        /// </param>
+        /// <returns>
+        ///     If parse is successful, returns the current <see cref="Size"/>, converted to a <see cref="YottaByte"/>,
+        ///     otherwise returns the current <see cref="Size"/> converted to the new <see cref="BaseValue"/> (If specified) with
+        ///     the correct value, then to a <see cref="string"/>.  <seealso cref="Units"/>.  <seealso cref="FileSize"/>.
+        ///     <seealso cref="decimal"/>.
+        /// </returns>
+        public string ToYottaByteString(NumberStyles numberStyles = NumberStyles.None, IFormatProvider provider = null)
+            => this.ToYottaByte(numberStyles, provider) + "YB";
+
+        private bool Equals(FileSize other) => (this._baseValue == other._baseValue) && (this.Size == other.Size);
+        #endregion
     }
 }

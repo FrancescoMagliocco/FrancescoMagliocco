@@ -27,7 +27,6 @@ namespace FrancescoMagliocco.Utils.Extensions
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     /// <summary>
@@ -84,11 +83,8 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If <paramref name="source"/> contains at least one of the specified <paramref name="values"/>, returns true.
         ///     Otherwise returns false.  <see cref="bool"/>.
         /// </returns>
-        [SuppressMessage("ReSharper", "ConvertMethodToExpressionBody")]
         public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, params TSource[] values)
-        {
-            return values.Any(source.Contains);
-        }
+            => values.Any(source.Contains);
 
         /// <summary>
         ///     Checks the given <paramref name="source"/> for all the specified <paramref name="values"/>.  <see cref="string"/>
@@ -138,12 +134,8 @@ namespace FrancescoMagliocco.Utils.Extensions
         ///     If <paramref name="source"/> contains all of the specified <paramref name="values"/>, returns true.  Otherwise
         ///     returns false.  <see cref="bool"/>.
         /// </returns>
-        [SuppressMessage("ReSharper", "ConvertToExpressionBodyWhenPossible")]
         public static bool ContainsAll<TSource>(this IEnumerable<TSource> source, params TSource[] values)
-        {
-            // TODO May not work as expected.
-            return !values.Any(value => !source.Contains(value));
-        }
+            => !values.Any(value => !source.Contains(value)); // TODO May not work as intended.
         #endregion
     }
 }
