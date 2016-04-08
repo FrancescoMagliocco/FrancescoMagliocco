@@ -6,17 +6,41 @@ using System.Threading.Tasks;
 
 namespace Test
 {
+    using System.IO;
     using System.Management;
- 
+
+    using FrancescoMagliocco.Utils.Helpers;
 
     class Program
     {
         static void Main(string[] args)
         {
-          
+
+            var allText = File.ReadAllLines(@"C:\Users\Anonr\Desktop\OSType.txt");
+
+            var sB = new StringBuilder();
+
+            for (var index = 1; index < allText.Length; index += 2)
+            {
+                
+                
+                    var str = allText[index];
+                    sB.AppendLine("/// <summary>");
+                    sB.AppendLine("/// " + str);
+                    sB.AppendLine("/// </summary>");
+                sB.AppendLine(str.Replace(" ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace("/", "_") + " = " + allText[index - 1].Split(new[] { '(' }, StringSplitOptions.RemoveEmptyEntries)[1].Replace(')', ','));
+                sB.AppendLine();
+
+                
+
+            }
+
+            File.WriteAllText(@"C:\Users\Anonr\Desktop\Types.txt", sB.ToString());
 
 
-           
+
+            Console.ReadKey();
+
         }
     }
 }
