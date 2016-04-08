@@ -1811,7 +1811,9 @@ namespace FrancescoMagliocco.Utils.Helpers
         ///         Data type: <see cref="DateTime"/><br/>
         ///         Access type: Read-only<br/>
         ///     </remarks>
-        ///     <para> Date object was installed. This property does not require a value to indicate that the object is installed. </para>
+        ///     <para>
+        ///         Date object was installed. This property does not require a value to indicate that the object is installed.
+        ///     </para>
         /// </summary>
         public static DateTime InstallDate => Get<DateTime>("InstallDate");
 
@@ -1854,7 +1856,9 @@ namespace FrancescoMagliocco.Utils.Helpers
         ///         Access type: Read-only<br/>
         ///         Qualifiers: <c> MappingStrings </c> ("WMI")<br/>
         ///     </remarks>
-        ///     <para> Name of the operating system manufacturer. For Windows-based systems, this value is "Microsoft Corporation". </para>
+        ///     <para>
+        ///         Name of the operating system manufacturer. For Windows-based systems, this value is "Microsoft Corporation".
+        ///     </para>
         /// </summary>
         public static string Manufacturer => Get<string>("Manufacturer");
 
@@ -2294,7 +2298,9 @@ namespace FrancescoMagliocco.Utils.Helpers
         ///         Datacenter Edition", "Single User", "Windows XP Home Edition", "Windows Server 2003, Web Edition")<br/>
         ///     </remarks>
         ///     <para> Bit flags that identify the product suites available on the system. </para>
-        ///     <para> For example, to specify both Personal and BackOffice, set <see langword="SuiteMask"/> to 4 | 512 or 516. </para>
+        ///     <para>
+        ///         For example, to specify both Personal and BackOffice, set <see langword="SuiteMask"/> to 4 | 512 or 516.
+        ///     </para>
         /// </summary>
         public static SuiteMasks SuiteMask
         {
