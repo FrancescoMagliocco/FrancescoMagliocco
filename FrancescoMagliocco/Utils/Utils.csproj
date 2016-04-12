@@ -44,10 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ToCharacter.cs" />
+    <Compile Include="Extensions\ToFloat32.cs" />
+    <Compile Include="Extensions\ToFloat64.cs" />
+    <Compile Include="Extensions\ToInt128.cs" />
+    <Compile Include="Extensions\ToInt16.cs" />
     <Compile Include="Extensions\ToInt32.cs" />
+    <Compile Include="Extensions\ToInt64.cs" />
+    <Compile Include="Extensions\ToInt8.cs" />
     <Compile Include="Extensions\ToUInt16.cs" />
     <Compile Include="Extensions\ToUInt32.cs" />
     <Compile Include="Extensions\ToUInt64.cs" />
+    <Compile Include="Extensions\ToUInt8.cs" />
     <Compile Include="Helpers\OSInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,9 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/KeepUserLineBreaks/@EntryValue">True</s:Boolean>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LIMIT/@EntryValue">110</s:Int64>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/KeepUserLineBreaks/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/LinebreaksInsideTagsWithTags/@EntryValue">True</s:Boolean>
 	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/MaxSingleLineTagLength/@EntryValue">2147483647</s:Int64>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/SimpleTagAlwaysOnNewLine/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/TagAlwaysOnNewLine/@EntryValue">True</s:Boolean>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/WrapLimit/@EntryValue">110</s:Int64>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/XmlDocFormatter/WrapOutsideOfElements/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=AIX/@EntryIndexedValue">AIX</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=ASERIES/@EntryIndexedValue">ASERIES</s:String>

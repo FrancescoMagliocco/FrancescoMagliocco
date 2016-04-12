@@ -15,6 +15,15 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            
+
+            var g = 111111111111111111111111111111111111111F;
+
+            var h = 11111111111111111111111111111l;
+            Console.WriteLine(double.MaxValue.ToString("0"));
+            Console.ReadKey();
+            return;
+
 
             var allText = File.ReadAllLines(@"C:\Users\Anonr\Desktop\OSType.txt");
 
