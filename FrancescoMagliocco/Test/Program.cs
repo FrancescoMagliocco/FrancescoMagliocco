@@ -17,7 +17,7 @@ namespace Test
         {
             
 
-            var g = 111111111111111111111111111111111111111F;
+            var g = 11111111111111111111111111111111111111F;
 
             var h = 11111111111111111111111111111l;
             Console.WriteLine(double.MaxValue.ToString("0"));
